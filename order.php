@@ -5,7 +5,7 @@ $message = file_get_contents('php://input');
 $order_details = json_decode($message);
 
 $count=count($requestArray=explode ('/', $_SERVER['REQUEST_URI']));
-echo "the count is". $count;
+
 if (($_SERVER['REQUEST_METHOD'] === 'POST') and $count<4){
     $_id=uniqid();
     $statusString="placed";
@@ -212,5 +212,6 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 				echo $myJSON;
 			
 			}
+		}
 
 ?>
