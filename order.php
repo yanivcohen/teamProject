@@ -215,8 +215,6 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 		}else if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 				echo "i am in orders";
 		          //    echo "i am in get";
-			//echo "GET Request the current state of the order specified by the URI.";
-			//echo $_SERVER['REQUEST_URI'];
 			$requestArray=explode ('/', $_SERVER['REQUEST_URI'] );
 		  //      echo var_dump($_SERVER['REQUEST_URI']);
 		//	echo "the request id is".  $requestArray[2];
@@ -226,8 +224,8 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 
                        // $options = [ 'projection' => ['_id' => 0],];
 		//	var_dump($filter);
-			$query = new MongoDB\Driver\Query($filter);
-			$cursor = $mng->executeQuery('starbucks.orders', $query);
+			$query = new MongoDB\Driver\Query([]);
+			$cursor = $mng->executeQuery('starbucks.orders',$query );
 			foreach ($cursor as $doc) {
     			  //	var_dump($doc);
 			}
@@ -254,6 +252,12 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 				echo $myJSON;
 		
 			}
+				
+		
+
+				
+		
+			
 
 }
 
