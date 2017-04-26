@@ -228,7 +228,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 			$cursor = $mng->executeQuery('starbucks.orders',$query );
 			foreach ($cursor as $doc) {
     			  //	var_dump($doc);
-			}
+			
 
                 //	echo "the id from the retruend find is" . $doc->_id   ;
 			//$doc=$empcollection->findOne($IDQuery);
@@ -255,7 +255,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 				
 		
 
-				
+		}// end for loop		
 		
 			
 
