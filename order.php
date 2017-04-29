@@ -7,6 +7,7 @@ $order_details = json_decode($message);
 $count=count($requestArray=explode ('/', $_SERVER['REQUEST_URI']));
 
 if (($_SERVER['REQUEST_METHOD'] === 'POST') and $count<4){
+
     $_id=uniqid();
     $statusString="placed";
     $OneOrderArray=['_id'=>$_id,'location' => $order_details->{'location'}, 'qty' => $order_details->items[0]->{'qty'}, 'name' => $order_details->items[0]->{'name'}, 'milk' => $order_details->items[0]->{'milk'},  'size' => $order_details->items[0]->{'size'},'status'=>$statusString,'message'=>"Order has been placed."];
@@ -220,16 +221,16 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 		//	echo "the request id is".  $requestArray[2];
 			//$IDQuery = array('_id' => $requestArray[2]);
 
-			$filter=['_id'=>$requestArray[2]];
+		//	$filter=['_id'=>$requestArray[2]];
 
                        // $options = [ 'projection' => ['_id' => 0],];
 		//	var_dump($filter);
 			$query = new MongoDB\Driver\Query([]);
 			$cursor = $mng->executeQuery('starbucks.orders',$query );
 			foreach ($cursor as $doc) {
-    			  //	var_dump($doc);
+    			  	var_dump($doc);
 			
-
+			}
                 //	echo "the id from the retruend find is" . $doc->_id   ;
 			//$doc=$empcollection->findOne($IDQuery);
 			//foreach ($cursor as $doc) {
@@ -255,7 +256,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 				
 		
 
-		}// end for loop		
+		// end for loop		
 		
 			
 
