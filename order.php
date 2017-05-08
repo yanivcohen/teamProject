@@ -5,7 +5,7 @@ $message = file_get_contents('php://input');
 $order_details = json_decode($message);
 
 $count=count($requestArray=explode ('/', $_SERVER['REQUEST_URI']));
-
+//var_dump($requestArray);
 if (($_SERVER['REQUEST_METHOD'] === 'POST') and $count<4){
 
     $_id=uniqid();
@@ -29,7 +29,7 @@ $myObj = new stdClass();
 			echo $myJSON;
 
 }
-else if ($_SERVER['REQUEST_METHOD'] === 'GET' and $requestArray[2] !="orders"){
+else if ($_SERVER['REQUEST_METHOD'] === 'GET' and $requestArray[1] !="orders"){
                     //    echo "i am in get";
 			//echo "GET Request the current state of the order specified by the URI.";
 			//echo $_SERVER['REQUEST_URI'];
@@ -214,7 +214,9 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 			
 			}
 		}else if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-				echo "i am in orders";
+				//echo "i am in orders";
+		//$i=0;
+				//echo "i am in orders";
 		          //    echo "i am in get";
 			$requestArray=explode ('/', $_SERVER['REQUEST_URI'] );
 		  //      echo var_dump($_SERVER['REQUEST_URI']);
@@ -228,7 +230,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 			$query = new MongoDB\Driver\Query([]);
 			$cursor = $mng->executeQuery('starbucks.orders',$query );
 			foreach ($cursor as $doc) {
-    			  	var_dump($doc);
+    			  	//var_dump($doc);
 			
 			}
                 //	echo "the id from the retruend find is" . $doc->_id   ;
@@ -236,9 +238,9 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 			//foreach ($cursor as $doc) {
 			//var_dump($doc);
 			//}
-		    if (count($doc)>0){
+		    
 				$myObjGet = new stdClass();
-		
+				$myObjGetTemp = new stdClass();
 				$myObjGet->id =$doc->_id ;
 		
 				$myObjGet->items = [['milk'=>$doc->milk,'name'=>$doc->name,'qty'=>$doc->qty , 'size'=>$doc->size]];
@@ -246,13 +248,21 @@ else if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
 				$myObjGet->location=$doc->location;
 				$myObjGet->status=$doc->status;
 				$myObjGet->message=$doc->message;
+				$myObjGetTemp=$myObjGet;
 				//var_dump($OneOrderArray);
-				$myJSON = json_encode($myObjGet);
-		
+				$list=array();
+				//$array = array();
+				array_push($list,$myObjGet);
+				array_push($list,$myObjGetTemp);
+				//echo json_encode($list);
+				echo json_encode($list);
+				//echo json_encode($doc);
+				//$myJSON = json_encode(array_values($array));
+				//var_dump($array);
 
-				echo $myJSON;
+				//echo $myJSON;
 		
-			}
+			
 				
 		
 
